@@ -40,7 +40,7 @@ const Home = () => {
             </button>
         </div>
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6 gap-4'>
-          <Cards restaurantData={restaurantData}/>
+          <Cards restaurantData={restaurantData} fetchData={fetchData}/>
         </div>    
     </div>
     {isOpen && <AddForm handleModalOpen={handleModalOpen} fetchData={fetchData}/>}

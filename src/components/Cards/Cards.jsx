@@ -1,6 +1,16 @@
 import React, { useState } from 'react'
-const Cards = ({restaurantData}) => {
-  const [isOpen, setIsOpen] = useState(false);
+import EditForm from '../Editform/EditForm'
+const Cards = ({restaurantData, fetchData}) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [editData, setEditData] = useState({})
+
+  const handleModalOpen = () =>{
+    setIsOpen((prev)=>!prev);
+}
+  const handleEdit = (id, name, address, contact, description, image) =>{
+    handleModalOpen()
+    setEditData({id, name, address, contact, description, image})
+  }
   return (
     <>
     {
@@ -22,10 +32,11 @@ const Cards = ({restaurantData}) => {
   </div>
   <div>
   <div className='h-auto px-3 py-1 rounded-2xl w-auto flex justify-center bg-slate-400 bg-opacity-80 opacity-0 group-hover:opacity-100 transition-all duration-500 absolute top-3 right-3 gap-2 items-center'>
-    <div><i class="fa-solid fa-pen-to-square"></i></div>
-    <div><i class="fa-solid fa-trash"></i></div>   
+    <div><i class="fa-solid fa-pen-to-square cursor-pointer" onClick={()=>handleEdit(item.id,item.name,item.address,item.contact,item.description,item.image)}></i></div>
+    <div><i class="fa-solid fa-trash cursor-pointer"></i></div>   
   </div>
 </div>
+{isOpen && <EditForm editData={editData} handleModalOpen={handleModalOpen} fetchData={fetchData}/>}
 </div> 
  )
   })
