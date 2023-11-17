@@ -47,7 +47,7 @@ const EditForm = ({handleModalOpen, editData, fetchData}) => {
         setIsLoading(false);
       };
   return (
-    <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] h-96 overflow-scroll w-5/6 md:w-2/6 z-10 bg-yellow-100 shadow shadow-yellow-300 rounded-md'>
+    <div className='fixed top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] h-96 overflow-scroll w-5/6 md:w-2/6 z-10 bg-yellow-100 shadow shadow-yellow-200 rounded-md'>
       <div className=''>
       <form className='px-4 mt-5' onSubmit={handleFormSubmit}>
         <div className='flex justify-end' style={{color:'gray'}}><IoMdClose size={32} className='cursor-pointer' onClick={()=>handleModalOpen()}/></div>
