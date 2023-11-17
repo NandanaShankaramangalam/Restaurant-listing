@@ -1,13 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cards from '../Cards/Cards'
 import AddForm from '../AddForm/AddForm'
+import { api } from '../../Services/axios'
 // import Restaurants from '../Restaurants/Restaurants'
 
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [restaurantData, setRestaurantData] = useState([])
     const handleModalOpen = () =>{
         setIsOpen((prev)=>!prev);
     }
+    
+    useEffect(()=>{
+     fetchData()
+    },[])
+
+    const fetchData = async () => {
+        try {
+          const response = await api.get("/");
+          console.log("Response from data fetch:", response.data.data);
+          if (response.data && response.data.data) {
+            setRestaurantData(response.data.data);
+          }
+        } catch (error) {
+          console.error("Error occurred while fetching data:", error);
+        }
+      };
   return (
     <div>
     <div className={`mt-32 px-16 ${isOpen?'blur':''}`}>
@@ -21,11 +39,11 @@ const Home = () => {
             Add a Restaurant
             </button>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-4 mb-6'>
-          <Cards/>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-6 gap-4'>
+          <Cards restaurantData={restaurantData}/>
         </div>    
     </div>
-    {isOpen && <AddForm handleModalOpen={handleModalOpen}/>}
+    {isOpen && <AddForm handleModalOpen={handleModalOpen} fetchData={fetchData}/>}
     </div>
   )
 }
